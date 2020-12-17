@@ -4,8 +4,7 @@
 #define foreach(p,head) \
 	for (Position p = head; p != NULL; p = p->next) 
 
-#include <stdio.h>
-#include <stdlib.h>
+
 
 
 struct _dir;
@@ -21,7 +20,7 @@ Position newDir(char*);
 Position findDir(Position, char*);
 
 int insertDir(Position, Position);
-int insertAfter(Position, Position);
+int insertAfterBrother(Position, Position);
 
-void printDir(Position);
+void printDir(Position,char *);
 void delete(Position);

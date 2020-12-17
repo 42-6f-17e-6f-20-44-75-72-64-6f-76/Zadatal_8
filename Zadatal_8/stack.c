@@ -1,5 +1,7 @@
-#include "stack.h"
 #include "tree.h"
+#include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 Position pop(Stackpos head) {
 	if (head->next == NULL)
@@ -16,44 +18,38 @@ Position pop(Stackpos head) {
 	return temp;
 }
 
-int getRandom(int lower, int upper)
-{
-	return  (rand() %
-		(upper - lower + 1)) + lower;
-}
-
-int push(Position where, Position what) {
+int push(Stackpos where, Stackpos what) {
 	what->next = where->next;
 	where->next = what;
 	return 0;
 }
 
-Position createNode(int k) {
+Stackpos createNode(Position k) {
 
-	Position el = NULL;
+	Stackpos el = NULL;
 
-	el = (Position)malloc(sizeof(Node));
+	el = (Stackpos)malloc(sizeof(Stack));
 
 	if (NULL == el) {
 		printf("Memory allocation failed!\r\n");
 		return NULL;
 	}
 
-	el->coef = k;
+	el->sDir = k;
 	el->next = NULL;
 
 	return el;
 }
 
-int printList(Position head) {
+int printList(Stackpos head) {
 
 	if (head->next != NULL) {
 		printf("\r\n\rLIST CONTENT:\r\n");
 
-		foreach(p, head->next) {
-			printf(" %d ", p->coef);
+		foreachStack(p, head->sDir) {
+			printf(" %s ", p->sDir->dir);
 			if (p->next != NULL)
-				printf(",");
+				printf("/");
 		}
 	}
 

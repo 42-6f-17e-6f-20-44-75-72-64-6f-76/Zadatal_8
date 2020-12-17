@@ -1,10 +1,8 @@
 #include "main.h"
 #include "tree.h"
 #include "stack.h"
-
-
-
-
+#include <stdio.h>
+#include <stdlib.h>
 
 
 
@@ -13,6 +11,9 @@ int main(void) {
 	Position current = NULL;
 	Position temp = NULL;
 	current = newDir("C:\\");
+	Stack pHead;
+	pHead.next = NULL;
+	
 
 	char inputBuff[COMMAND_LEN]={ '\0' };
 
@@ -21,12 +22,15 @@ int main(void) {
 
 	do {
 		
-
+		
 
 		printf("%s>", current->dir);
 		scanf(" %s", inputBuff);
 
 		if (strcmp(inputBuff, "md") == 0) {
+
+			
+
 
 			scanf(" %s", inputBuff);
 
@@ -43,6 +47,8 @@ int main(void) {
 			}
 			else
 			{
+				push(&pHead, current);
+			
 				current = temp;
 			}
 			
@@ -50,11 +56,11 @@ int main(void) {
 		}
 		else if (strcmp(inputBuff, "cd ..") == 0) {
 
-
+			current = pop(&pHead);
 		}
 		else if (strcmp(inputBuff, "dir") == 0) {
 
-			printDir(current);
+			printDir(current,"");
 
 		}
 		else if (strcmp(inputBuff, "cls") == 0) {

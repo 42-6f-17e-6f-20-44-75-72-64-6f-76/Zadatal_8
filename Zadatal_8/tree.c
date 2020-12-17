@@ -1,4 +1,8 @@
 #include "tree.h"
+#include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 
 Position newDir(char* dirname) {
 	Position temp = NULL;
@@ -14,32 +18,42 @@ Position newDir(char* dirname) {
 	return temp;
 }
 
-void printDir(Position p) {
+void printDir(Position p,char* format) {
 
 	if (p == NULL)
 		return;
 
-	printf("%s\n", p->dir);
-	printDir(p->next);
-	printDir(p->child);
+	printf("%s%s\n", format,p->dir);
+	printDir(p->next,"\n");
+	printDir(p->child,"\t");
 
 }
 
 int insertDir(Position q, Position what) {
 
-	foreach(p, q)
+	if (q->child == NULL)
+	{
+		what->next = q->child;
+		q->child = what;
+		return 0;
+	}
+
+
+	foreach(p, q->child)
 		if (p->next != NULL && strcmp(p->next->dir, what->dir) > 0)
 		{
-			insertAfter(p, what);
-			break;
+			insertAfterBrother(p, what);
+			return 1;
 		}
 		else if (p->next == NULL) {
-			insertAfter(p, what);
-			break;
+			insertAfterBrother(p, what);
+			return 1;
 		}
+
+	return 1;
 }
 
-int insertAfter(Position where, Position what) {
+ int insertAfterBrother(Position where, Position what) {
 	what->next = where->next;
 	where->next = what;
 	return 0;
