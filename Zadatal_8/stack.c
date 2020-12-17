@@ -1,5 +1,7 @@
+
 #include "tree.h"
 #include "stack.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -41,23 +43,21 @@ Stackpos createNode(Position k) {
 	return el;
 }
 
-int printList(Stackpos head) {
+int printStack(Stackpos head) {
 
-	if (head->next != NULL) {
-		printf("\r\n\rLIST CONTENT:\r\n");
+	if (head == NULL)
+		return 0;
 
-		foreachStack(p, head->sDir) {
-			printf(" %s ", p->sDir->dir);
-			if (p->next != NULL)
-				printf("/");
-		}
-	}
 
-	else {
-		printf("\r\n\rLIST IS EMPTY.\r\n");
-	}
+	printStack(head->next);
 
-	puts("\n");
+
+	
+			printf("%s", head->sDir->dir);
+			if (head->next != NULL)
+				printf("\\");
+		
+
 
 	return 0;
 }

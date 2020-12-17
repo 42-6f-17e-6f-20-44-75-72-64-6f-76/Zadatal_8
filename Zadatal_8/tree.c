@@ -60,7 +60,7 @@ int insertDir(Position q, Position what) {
 }
 
 Position findDir(Position q, char* dirname) {
-	for (Position p = q; p != NULL; p = p->next)
+	for (Position p = q->child; p != NULL; p = p->next)
 		if (strcmp(p->dir, dirname) == 0)
 			return p;
 

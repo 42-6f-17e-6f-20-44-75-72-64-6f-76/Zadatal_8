@@ -13,7 +13,7 @@ int main(void) {
 	current = newDir("C:\\");
 	Stack pHead;
 	pHead.next = NULL;
-	
+	pHead.sDir = NULL;
 
 	char inputBuff[COMMAND_LEN]={ '\0' };
 
@@ -23,7 +23,7 @@ int main(void) {
 	do {
 		
 		
-
+		printStack(pHead.next);
 		printf("%s>", current->dir);
 		scanf(" %s", inputBuff);
 
@@ -47,7 +47,7 @@ int main(void) {
 			}
 			else
 			{
-				push(&pHead, current);
+				push(&pHead, createNode(current));
 			
 				current = temp;
 			}

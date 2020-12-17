@@ -8,6 +8,7 @@
 	for (Stackpos p = head; p != NULL; p = p->next) 
 
 
+
 struct _stack;
 typedef struct _stack* Stackpos;
 typedef struct _stack {
@@ -17,7 +18,7 @@ typedef struct _stack {
 
 
 Stackpos createNode(Position);
-int printList(Stackpos);
+int printStack(Stackpos);
 
 Position pop(Stackpos);
 int push(Stackpos, Stackpos);
