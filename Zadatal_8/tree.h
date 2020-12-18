@@ -22,5 +22,5 @@ Position findDir(Position, char*);
 int insertDir(Position, Position);
 int insertAfterBrother(Position, Position);
 
-void printDir(Position,char *);
-void delete(Position);
+void printDir(Position);
+Position delete(Position);

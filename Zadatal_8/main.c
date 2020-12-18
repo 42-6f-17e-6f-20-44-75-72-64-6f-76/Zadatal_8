@@ -39,28 +39,35 @@ int main(void) {
 		else if (strcmp(inputBuff, "cd") == 0) {
 			scanf(" %s", inputBuff);
 
-			temp = findDir(current, inputBuff);
+			if (strcmp(inputBuff, "..") == 0) {
 
-			if (temp == NULL) {
-				printf("The system cannot find the path specified.\n");
+				temp = pop(&pHead);
+
+				if (temp != NULL) 
+					current = temp;
+				
+
+			}else{
+				
+				temp = findDir(current, inputBuff);
+
+				if (temp == NULL) {
+					printf("The system cannot find the path specified.\n");
+
+				}
+				else
+				{
+					push(&pHead, createNode(current));
+			
+					current = temp;
+				}
 
 			}
-			else
-			{
-				push(&pHead, createNode(current));
-			
-				current = temp;
-			}
-			
 
-		}
-		else if (strcmp(inputBuff, "cd ..") == 0) {
-
-			current = pop(&pHead);
 		}
 		else if (strcmp(inputBuff, "dir") == 0) {
 
-			printDir(current,"");
+			printDir(current);
 
 		}
 		else if (strcmp(inputBuff, "cls") == 0) {
@@ -71,13 +78,26 @@ int main(void) {
 		else if (strcmp(inputBuff, "exit") != 0) {
 
 			printf("'%s' is not recognized as an internal or external command,\noperable program or batch file.\n",inputBuff);
-
+			int c;
+			while ((c = getchar()) != '\n' && c != EOF);
 		}
 
 	} while (strcmp(inputBuff, "exit") != 0);
 
 
 
+
+	while ((temp = pop(&pHead)) != NULL)
+		current = temp;
+
+	current=delete(current);
+
+
+
+
+
+
 	system("pause");
+
 	return EXIT_SUCCESS;
 }

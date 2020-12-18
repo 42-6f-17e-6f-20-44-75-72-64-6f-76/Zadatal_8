@@ -54,6 +54,7 @@ int printStack(Stackpos head) {
 
 	
 			printf("%s", head->sDir->dir);
+
 			if (head->next != NULL)
 				printf("\\");
 		

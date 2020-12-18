@@ -18,15 +18,13 @@ Position newDir(char* dirname) {
 	return temp;
 }
 
-void printDir(Position p,char* format) {
-
-	if (p == NULL)
+void printDir(Position q) {
+	if (q == NULL)
 		return;
 
-	printf("%s%s\n", format,p->dir);
-	printDir(p->next,"\n");
-	printDir(p->child,"\t");
-
+	foreach(p, q->child) {
+		printf("\t%s\n", p->dir);
+	}
 }
 
 int insertDir(Position q, Position what) {
@@ -67,12 +65,13 @@ Position findDir(Position q, char* dirname) {
 	return NULL;
 }
 
-void delete(Position p) {
+Position delete(Position p) {
 	if (p == NULL)
-		return;
+		return NULL;
 
-	delete(p->next);
-	delete(p->child);
+	p->next=delete(p->next);
+	p->next=delete(p->child);
 
 	free(p);
+	return NULL;
 }
